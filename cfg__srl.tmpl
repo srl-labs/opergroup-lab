@@ -1,0 +1,89 @@
+{{/* Configure P-to-P interfaces */}}
+
+{{ range $name, $link := .clab_links }}
+{{ if $link.port }}
+/ interface {{ $link.port }} subinterface 0 ipv4 address {{ $link.clab_link_ip }}
+/ interface {{ $link.port }} subinterface 0 description {{ $link.clab_link_name }}
+/ interface {{ $link.port }} subinterface 0 ip-mtu 9000
+/ network-instance default interface {{ $link.port }}.0
+{{- end }}
+{{- end }}
+
+{{/* Configure system interface */}}
+/ interface system0 admin-state enable 
+/ interface system0 subinterface 0 ipv4 address {{ .system_ip }}/32
+/ network-instance default type default
+/ network-instance default interface system0.0
+
+{{/* policy to allow all */}}
+/ routing-policy policy all default-action accept
+
+{{/* Underlay Config */}}
+/ network-instance default protocols bgp router-id {{ .system_ip }}
+/ network-instance default protocols bgp autonomous-system {{ .as }}
+/ network-instance default protocols bgp group eBGP-underlay export-policy all
+/ network-instance default protocols bgp group eBGP-underlay import-policy all
+/ network-instance default protocols bgp ipv4-unicast admin-state enable
+
+{{/* If the bgp_underlay flag specified under the link then configure underlay ebgp on links */}}
+{{- range $name, $link := .clab_links -}}
+  {{- if .bgp_underlay }}
+/ network-instance default protocols bgp neighbor {{ ip $link.clab_far.clab_link_ip }} peer-group eBGP-underlay
+/ network-instance default protocols bgp neighbor {{ ip $link.clab_far.clab_link_ip }} peer-as {{(index $.clab_nodes $link.clab_far.clab_node).as}}
+  {{- end }} 
+{{- end -}}
+
+
+
+{{/* Overlay Config */}}
+/ network-instance default protocols bgp group iBGP-overlay export-policy all
+/ network-instance default protocols bgp group iBGP-overlay import-policy all
+/ network-instance default protocols bgp group iBGP-overlay ipv4-unicast admin-state disable
+/ network-instance default protocols bgp group iBGP-overlay evpn admin-state enable
+/ network-instance default protocols bgp group iBGP-overlay timers minimum-advertisement-interval 1
+/ network-instance default protocols bgp group iBGP-overlay transport local-address {{ .system_ip }}
+/ network-instance default protocols bgp group iBGP-overlay peer-as {{ $.overlay_as }}
+/ network-instance default protocols bgp group iBGP-overlay local-as {{ $.overlay_as }}
+
+{{- if eq .behavior "leaf" }} 
+  {{- range $name, $node := $.clab_nodes }}
+    {{- if eq .behavior "spine" }}
+/ network-instance default protocols bgp neighbor {{ $node.system_ip }} peer-group iBGP-overlay
+    {{- end -}}
+  {{- end -}}  
+
+/ interface ethernet-1/1 description ES-1
+/ interface ethernet-1/1 ethernet aggregate-id lag1
+/ interface lag1 admin-state enable
+/ interface lag1 subinterface 0 type bridged
+/ interface lag1 lag lag-type lacp
+/ interface lag1 lag member-speed 100G
+/ interface lag1 lag lacp interval SLOW
+/ interface lag1 lag lacp system-id-mac 00:00:00:00:00:01
+
+/ tunnel-interface vxlan1 vxlan-interface 1 type bridged
+/ tunnel-interface vxlan1 vxlan-interface 1 ingress vni 1
+
+/ network-instance vrf-1 type mac-vrf
+/ network-instance vrf-1 admin-state enable
+/ network-instance vrf-1 interface lag1.0
+/ network-instance vrf-1 vxlan-interface vxlan1.1
+
+/ network-instance vrf-1 protocols bgp-evpn bgp-instance 1 admin-state enable
+/ network-instance vrf-1 protocols bgp-evpn bgp-instance 1 vxlan-interface vxlan1.1
+/ network-instance vrf-1 protocols bgp-evpn bgp-instance 1 evi 1
+/ network-instance vrf-1 protocols bgp-evpn bgp-instance 1 ecmp 2
+/ network-instance vrf-1 protocols bgp-vpn bgp-instance 1 route-target export-rt target:100:1
+/ network-instance vrf-1 protocols bgp-vpn bgp-instance 1 route-target import-rt target:100:1
+
+/ system network-instance protocols evpn ethernet-segments bgp-instance 1 ethernet-segment ES-1 admin-state enable
+/ system network-instance protocols evpn ethernet-segments bgp-instance 1 ethernet-segment ES-1 esi {{ .es_esi }}
+/ system network-instance protocols evpn ethernet-segments bgp-instance 1 ethernet-segment ES-1 multi-homing-mode all-active
+/ system network-instance protocols evpn ethernet-segments bgp-instance 1 ethernet-segment ES-1 interface lag1
+/ system network-instance protocols bgp-vpn bgp-instance 1
+{{- end -}}
+
+{{- if eq .behavior "spine" }} 
+/ network-instance default protocols bgp group iBGP-overlay route-reflector client true
+/ network-instance default protocols bgp dynamic-neighbors accept match 0.0.0.0/0 peer-group iBGP-overlay
+{{- end -}}
