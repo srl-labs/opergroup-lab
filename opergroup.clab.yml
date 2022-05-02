@@ -1,27 +1,58 @@
 # topology documentation: http://learn.srlinux.dev/tutorials/programmability/event-handler/oper-group/
 name: opergroup
-prefix: ""
+#prefix: ""
 
 topology:
   defaults:
     kind: srl
+    config:
+      vars:
+        overlay_as: 100
   kinds:
     srl:
-      image: srlinux:36067 # TODO: change to ghcr.io/nokia/srlinux:22.3.2
+      image: registry.srlinux.dev/pub/srlinux:latest # TODO: change to ghcr.io/nokia/srlinux:22.3.2
   nodes:
     ### FABRIC ###
     leaf1:
-      startup-config: configs/leaf1.cfg
+      config:
+        vars:
+          system_ip: 10.0.0.1
+          as: 101
+          behavior: leaf
+          es_esi: 01:01:01:01:01:01:01:01:01:01
     leaf2:
-      startup-config: configs/leaf2.cfg
+      config:
+        vars:
+          system_ip: 10.0.0.2
+          as: 102
+          behavior: leaf
+          es_esi: 01:01:01:01:01:01:01:01:01:01
     leaf3:
-      startup-config: configs/leaf3.cfg
+      config:
+        vars:
+          system_ip: 10.0.0.3
+          as: 103
+          behavior: leaf
+          es_esi: 02:02:02:02:02:02:02:02:02:02
     leaf4:
-      startup-config: configs/leaf4.cfg
+      config:
+        vars:
+          system_ip: 10.0.0.4
+          as: 104
+          behavior: leaf
+          es_esi: 02:02:02:02:02:02:02:02:02:02
     spine1:
-      startup-config: configs/spine1.cfg
+      config:
+        vars:
+          system_ip: 10.0.1.1
+          as: 201
+          behavior: spine
     spine2:
-      startup-config: configs/spine2.cfg
+      config:
+        vars:
+          system_ip: 10.0.1.2
+          as: 201
+          behavior: spine
     ### CLIENTS ###
     client1:
       kind: linux
@@ -81,13 +112,45 @@ topology:
     # leaf-spine links
     ## leaf1
     - endpoints: ["leaf1:e1-49", "spine1:e1-1"]
+      vars:
+        port: [ethernet-1/49, ethernet-1/1]
+        clab_link_ip: 192.168.11.1/30
+        bgp_underlay: true
     - endpoints: ["leaf1:e1-50", "spine2:e1-1"]
+      vars:
+        port: [ethernet-1/50, ethernet-1/1]
+        clab_link_ip: 192.168.12.1/30
+        bgp_underlay: true
     ## leaf2
     - endpoints: ["leaf2:e1-49", "spine1:e1-2"]
+      vars:
+        port: [ethernet-1/49, ethernet-1/2]
+        clab_link_ip: 192.168.21.1/30
+        bgp_underlay: true
     - endpoints: ["leaf2:e1-50", "spine2:e1-2"]
+      vars:
+        port: [ethernet-1/50, ethernet-1/2]
+        clab_link_ip: 192.168.22.1/30
+        bgp_underlay: true
     ## leaf3
     - endpoints: ["leaf3:e1-49", "spine1:e1-3"]
+      vars:
+        port: [ethernet-1/49, ethernet-1/3]
+        clab_link_ip: 192.168.31.1/30
+        bgp_underlay: true
     - endpoints: ["leaf3:e1-50", "spine2:e1-3"]
+      vars:
+        port: [ethernet-1/50, ethernet-1/3]
+        clab_link_ip: 192.168.32.1/30
+        bgp_underlay: true
     ## leaf4
     - endpoints: ["leaf4:e1-49", "spine1:e1-4"]
+      vars:
+        port: [ethernet-1/49, ethernet-1/4]
+        clab_link_ip: 192.168.41.1/30
+        bgp_underlay: true
     - endpoints: ["leaf4:e1-50", "spine2:e1-4"]
+      vars:
+        port: [ethernet-1/50, ethernet-1/4]
+        clab_link_ip: 192.168.42.1/30
+        bgp_underlay: true
