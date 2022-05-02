@@ -27,11 +27,11 @@ def event_handler_main(in_json_str):
         "up" if required_up_uplinks(options) <= num_up_uplinks else "down"
     )
 
-    if options.get("debug"):
+    if options.get("debug") == "true":
         print(
-            f"num of required up uplinks = {required_up_uplinks(options)}\n"
-            f"detected num of up uplinks = {num_up_uplinks}\n"
-            f"downlinks new state = {downlinks_new_state}\n"
+            f"num of required up uplinks = {required_up_uplinks(options)}\n\
+detected num of up uplinks = {num_up_uplinks}\n\
+downlinks new state = {downlinks_new_state}"
         )
 
     response_actions = []
@@ -39,17 +39,15 @@ def event_handler_main(in_json_str):
     for downlink in options.get("down-links", []):
         response_actions.append(
             {
-                "set-ephemeral-path": f"interface {downlink} oper-state",
-                "value": downlinks_new_state,
+                "set-ephemeral-path": {
+                    "path": f"interface {downlink} oper-state",
+                    "value": downlinks_new_state,
+                }
             }
         )
 
     response = {"actions": response_actions}
-    if options.get("debug"):
-        json_response = json.dumps(response, indent=4)
-    else:
-        json_response = json.dumps(response)
-    return json_response
+    return json.dumps(response)
 
 
 #
@@ -74,7 +72,7 @@ def main():
             "Ethernet-1/1",
             "Ethernet-1/2"
         ],
-        "debug":true
+        "debug": "true"
         },
     "persistent-data": {"last-state":"up"}
 }

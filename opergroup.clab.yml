@@ -12,6 +12,8 @@ topology:
     ### FABRIC ###
     leaf1:
       startup-config: configs/leaf1.cfg
+      binds:
+        - opergroup.py:/etc/opt/srlinux/eventmgr/opergroup.py
     leaf2:
       startup-config: configs/leaf2.cfg
     leaf3:
