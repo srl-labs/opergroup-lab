@@ -24,7 +24,6 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 1,
-  "id": 1,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -43,7 +42,7 @@
             "axisPlacement": "auto",
             "barAlignment": 0,
             "drawStyle": "line",
-            "fillOpacity": 50,
+            "fillOpacity": 10,
             "gradientMode": "none",
             "hideFrom": {
               "legend": false,
@@ -113,10 +112,12 @@
             "type": "prometheus",
             "uid": "PBFA97CFB590B2093"
           },
+          "editorMode": "code",
           "expr": "rate(gnmic_srl_if_in_octets{source=\"leaf1:57400\",interface_name=\"ethernet-1/49\"}[5s])*8",
           "interval": "",
-          "legendFormat": "ethernet-1/1 IN",
+          "legendFormat": "IN",
           "queryType": "randomWalk",
+          "range": true,
           "refId": "A"
         },
         {
@@ -124,9 +125,11 @@
             "type": "prometheus",
             "uid": "PBFA97CFB590B2093"
           },
+          "editorMode": "code",
           "expr": "-rate(gnmic_srl_if_out_octets{source=\"leaf1:57400\",interface_name=\"ethernet-1/49\"}[5s])*8",
           "interval": "",
-          "legendFormat": "ethernet-1/1 OUT",
+          "legendFormat": "OUT",
+          "range": true,
           "refId": "B"
         }
       ],
@@ -148,7 +151,7 @@
             "axisPlacement": "auto",
             "barAlignment": 0,
             "drawStyle": "line",
-            "fillOpacity": 50,
+            "fillOpacity": 10,
             "gradientMode": "none",
             "hideFrom": {
               "legend": false,
@@ -215,10 +218,12 @@
             "type": "prometheus",
             "uid": "PBFA97CFB590B2093"
           },
+          "editorMode": "code",
           "expr": "rate(gnmic_srl_if_in_octets{source=\"leaf1:57400\",interface_name=\"ethernet-1/50\"}[5s])*8",
           "interval": "",
-          "legendFormat": "ethernet-1/1 IN",
+          "legendFormat": "IN",
           "queryType": "randomWalk",
+          "range": true,
           "refId": "A"
         },
         {
@@ -226,9 +231,11 @@
             "type": "prometheus",
             "uid": "PBFA97CFB590B2093"
           },
+          "editorMode": "code",
           "expr": "-rate(gnmic_srl_if_out_octets{source=\"leaf1:57400\",interface_name=\"ethernet-1/50\"}[5s])*8",
           "interval": "",
-          "legendFormat": "ethernet-1/1 OUT",
+          "legendFormat": "OUT",
+          "range": true,
           "refId": "B"
         }
       ],
@@ -317,10 +324,12 @@
             "type": "prometheus",
             "uid": "PBFA97CFB590B2093"
           },
+          "editorMode": "code",
           "expr": "rate(gnmic_srl_if_in_octets{source=\"leaf2:57400\",interface_name=\"ethernet-1/49\"}[5s])*8",
           "interval": "",
-          "legendFormat": "ethernet-1/1 IN",
+          "legendFormat": "IN",
           "queryType": "randomWalk",
+          "range": true,
           "refId": "A"
         },
         {
@@ -328,9 +337,11 @@
             "type": "prometheus",
             "uid": "PBFA97CFB590B2093"
           },
+          "editorMode": "code",
           "expr": "-rate(gnmic_srl_if_out_octets{source=\"leaf2:57400\",interface_name=\"ethernet-1/49\"}[5s])*8",
           "interval": "",
-          "legendFormat": "ethernet-1/1 OUT",
+          "legendFormat": "OUT",
+          "range": true,
           "refId": "B"
         }
       ],
@@ -419,10 +430,12 @@
             "type": "prometheus",
             "uid": "PBFA97CFB590B2093"
           },
+          "editorMode": "code",
           "expr": "rate(gnmic_srl_if_in_octets{source=\"leaf2:57400\",interface_name=\"ethernet-1/50\"}[5s])*8",
           "interval": "",
-          "legendFormat": "ethernet-1/1 IN",
+          "legendFormat": "IN",
           "queryType": "randomWalk",
+          "range": true,
           "refId": "A"
         },
         {
@@ -430,9 +443,11 @@
             "type": "prometheus",
             "uid": "PBFA97CFB590B2093"
           },
+          "editorMode": "code",
           "expr": "-rate(gnmic_srl_if_out_octets{source=\"leaf2:57400\",interface_name=\"ethernet-1/50\"}[5s])*8",
           "interval": "",
-          "legendFormat": "ethernet-1/1 OUT",
+          "legendFormat": "OUT",
+          "range": true,
           "refId": "B"
         }
       ],
@@ -454,7 +469,7 @@
             "axisPlacement": "auto",
             "barAlignment": 0,
             "drawStyle": "line",
-            "fillOpacity": 50,
+            "fillOpacity": 10,
             "gradientMode": "none",
             "hideFrom": {
               "legend": false,
@@ -496,9 +511,9 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 9,
-        "w": 12,
-        "x": 0,
+        "h": 8,
+        "w": 7,
+        "x": 2,
         "y": 8
       },
       "id": 2,
@@ -521,11 +536,12 @@
             "type": "prometheus",
             "uid": "PBFA97CFB590B2093"
           },
+          "editorMode": "code",
           "expr": "rate(gnmic_srl_if_in_octets{source=\"leaf1:57400\",interface_name=\"ethernet-1/1\"}[5s])*8",
           "instant": false,
           "interval": "",
           "intervalFactor": 1,
-          "legendFormat": "ethernet-1/1 IN",
+          "legendFormat": "IN",
           "queryType": "randomWalk",
           "refId": "A"
         },
@@ -534,14 +550,37 @@
             "type": "prometheus",
             "uid": "PBFA97CFB590B2093"
           },
+          "editorMode": "code",
           "expr": "-rate(gnmic_srl_if_out_octets{source=\"leaf1:57400\",interface_name=\"ethernet-1/1\"}[5s])*8",
           "interval": "",
-          "legendFormat": "ethernet-1/1 OUT",
+          "legendFormat": "OUT",
+          "range": true,
           "refId": "B"
         }
       ],
       "title": "Leaf1 e1-1 throughput",
       "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "datasource",
+        "uid": "grafana"
+      },
+      "description": "",
+      "gridPos": {
+        "h": 17,
+        "w": 6,
+        "x": 9,
+        "y": 8
+      },
+      "id": 9,
+      "options": {
+        "content": "![pic](https://gitlab.com/rdodin/pics/-/wikis/uploads/2b4d00587f55ea9f4ef1b5be3a60e061/image.png)",
+        "mode": "markdown"
+      },
+      "pluginVersion": "8.5.0",
+      "title": "Topology",
+      "type": "text"
     },
     {
       "datasource": {
@@ -601,8 +640,8 @@
       },
       "gridPos": {
         "h": 9,
-        "w": 12,
-        "x": 12,
+        "w": 7,
+        "x": 15,
         "y": 8
       },
       "id": 4,
@@ -625,10 +664,12 @@
             "type": "prometheus",
             "uid": "PBFA97CFB590B2093"
           },
-          "expr": "rate(gnmic_srl_if_in_octets{source=\"leaf2:57400\",interface_name=\"ethernet-1/1\"}[2s])*8",
+          "editorMode": "code",
+          "expr": "rate(gnmic_srl_if_in_octets{source=\"leaf2:57400\",interface_name=\"ethernet-1/1\"}[5s])*8",
           "interval": "",
-          "legendFormat": "ethernet-1/1 IN",
+          "legendFormat": "IN",
           "queryType": "randomWalk",
+          "range": true,
           "refId": "A"
         },
         {
@@ -636,9 +677,11 @@
             "type": "prometheus",
             "uid": "PBFA97CFB590B2093"
           },
-          "expr": "-rate(gnmic_srl_if_out_octets{source=\"leaf2:57400\",interface_name=\"ethernet-1/1\"}[2s])*8",
+          "editorMode": "code",
+          "expr": "-rate(gnmic_srl_if_out_octets{source=\"leaf2:57400\",interface_name=\"ethernet-1/1\"}[5s])*8",
           "interval": "",
-          "legendFormat": "ethernet-1/1 OUT",
+          "legendFormat": "OUT",
+          "range": true,
           "refId": "B"
         }
       ],
