@@ -21,40 +21,30 @@ def event_handler_main(in_json_str):
     in_json = json.loads(in_json_str)
     paths = in_json["paths"]
     options = in_json["options"]
-    persist = in_json["persistent-data"]
 
     num_up_uplinks = count_up_uplinks(paths)
     downlinks_new_state = (
         "up" if required_up_uplinks(options) <= num_up_uplinks else "down"
     )
-    last_state = persist.get("last-state", "down")
 
     if options.get("debug"):
         print(
-            f"num of required up uplinks = {required_up_uplinks(options)}\n\
-detected num of up uplinks = {num_up_uplinks}\n\
-last state = {last_state}\n\
-downlinks new state = {downlinks_new_state}\n"
+            f"num of required up uplinks = {required_up_uplinks(options)}\n"
+            f"detected num of up uplinks = {num_up_uplinks}\n"
+            f"downlinks new state = {downlinks_new_state}\n"
         )
 
-    response_persist = {"last-state": last_state}
-    response_actions = {"actions": []}
-    # return empty result if no state change is required
-    if downlinks_new_state == last_state:
-        return json.dumps(
-            {"persistent-data": response_persist, "actions": response_actions}
-        )
+    response_actions = []
 
     for downlink in options.get("down-links", []):
-        response_actions["actions"].append(
+        response_actions.append(
             {
                 "set-ephemeral-path": f"interface {downlink} oper-state",
                 "value": downlinks_new_state,
             }
         )
 
-    response_persist = {"last-state": downlinks_new_state}
-    response = {"persistent-data": response_persist, "actions": response_actions}
+    response = {"actions": response_actions}
     if options.get("debug"):
         json_response = json.dumps(response, indent=4)
     else:
@@ -90,7 +80,7 @@ def main():
 }
 """
     json_response = event_handler_main(example_in_json_str)
-    print(json_response)
+    print(f"Response JSON:\n{json_response}")
 
 
 if __name__ == "__main__":
