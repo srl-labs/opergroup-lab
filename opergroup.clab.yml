@@ -43,7 +43,7 @@ topology:
         - bash /tmp/bond.sh
         - ip link set bond0 address 00:c1:ab:00:00:02
         - ip addr add 192.168.100.2/24 dev bond0
-        - iperf3 -s -D
+        - iperf3 -s -D > iperf3.log
 
     ### TELEMETRY STACK ###
     gnmic:
