@@ -22,20 +22,6 @@ subscriptions:
     stream-mode: sample
     sample-interval: 1s
 
-  # srl_bgp_stats:
-  #   paths:
-  #     - /network-instance[name=*]/protocols/bgp/statistics
-  #   mode: stream
-  #   stream-mode: sample
-  #   sample-interval: 5s
-
-  # srl_ipv4_routes:
-  #   paths:
-  #     - /network-instance[name=*]/route-table/ipv4-unicast/statistics/
-  #   mode: stream
-  #   stream-mode: sample
-  #   sample-interval: 5s
-
 outputs:
   prom:
     type: prometheus
@@ -46,14 +32,19 @@ outputs:
     export-timestamps: true
     debug: false
     event-processors:
+      - convert-op-state
       - trim-prefixes
+  # uncomment stdout output to see processors in play
   # stdout:
   #   type: file
   #   file-type: stdout
+  #   format: event
   #   event-processors:
+  #     - convert-op-state
   #     - trim-prefixes
 
 processors:
+  # trim prefixes of the collected notifications to shorten the metric names
   trim-prefixes:
     event-strings:
       value-names:
@@ -61,3 +52,18 @@ processors:
       transforms:
         - path-base:
             apply-on: "name"
+  # converting string-based oper-state values to string-typed integers
+  # so that once automatically converted to floats they can be stored in prometheus
+  convert-op-state:
+    event-strings:
+      value-names:
+        - ".*"
+      transforms:
+        - replace:
+            apply-on: "value"
+            old: "down"
+            new: "0"
+        - replace:
+            apply-on: "value"
+            old: "up"
+            new: "1"
