@@ -87,7 +87,7 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 8,
+        "h": 7,
         "w": 6,
         "x": 0,
         "y": 0
@@ -193,7 +193,7 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 8,
+        "h": 7,
         "w": 6,
         "x": 6,
         "y": 0
@@ -299,7 +299,7 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 8,
+        "h": 7,
         "w": 6,
         "x": 12,
         "y": 0
@@ -405,7 +405,7 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 8,
+        "h": 7,
         "w": 6,
         "x": 18,
         "y": 0
@@ -511,10 +511,10 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 8,
-        "w": 7,
-        "x": 2,
-        "y": 8
+        "h": 7,
+        "w": 9,
+        "x": 0,
+        "y": 7
       },
       "id": 2,
       "interval": "1s",
@@ -568,10 +568,10 @@
       },
       "description": "",
       "gridPos": {
-        "h": 17,
+        "h": 12,
         "w": 6,
         "x": 9,
-        "y": 8
+        "y": 7
       },
       "id": 9,
       "options": {
@@ -639,10 +639,10 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 9,
-        "w": 7,
+        "h": 7,
+        "w": 9,
         "x": 15,
-        "y": 8
+        "y": 7
       },
       "id": 4,
       "interval": "1s",
@@ -687,6 +687,123 @@
       ],
       "title": "Leaf2 e1-1 throughput",
       "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "PBFA97CFB590B2093"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "fixed"
+          },
+          "custom": {
+            "fillOpacity": 70,
+            "lineWidth": 0,
+            "spanNulls": false
+          },
+          "mappings": [
+            {
+              "options": {
+                "0": {
+                  "color": "red",
+                  "index": 0,
+                  "text": "DOWN"
+                },
+                "1": {
+                  "color": "green",
+                  "index": 1,
+                  "text": "UP"
+                }
+              },
+              "type": "value"
+            }
+          ],
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": null
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 9,
+        "x": 0,
+        "y": 14
+      },
+      "id": 13,
+      "interval": "1s",
+      "options": {
+        "alignValue": "left",
+        "legend": {
+          "displayMode": "hidden",
+          "placement": "bottom"
+        },
+        "mergeValues": true,
+        "rowHeight": 0.9,
+        "showValue": "auto",
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "8.5.0",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "gnmic_srl_if_oper_state{source=\"leaf1:57400\", interface_name=\"ethernet-1/1\"}",
+          "format": "time_series",
+          "instant": false,
+          "legendFormat": "e-1/1",
+          "range": true,
+          "refId": "e1-1"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "gnmic_srl_if_oper_state{source=\"leaf1:57400\", interface_name=\"ethernet-1/49\"}",
+          "format": "time_series",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "e-1/49",
+          "range": true,
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "gnmic_srl_if_oper_state{source=\"leaf1:57400\", interface_name=\"ethernet-1/50\"}",
+          "format": "time_series",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "e-1/50",
+          "range": true,
+          "refId": "B"
+        }
+      ],
+      "title": "leaf1 oper-states",
+      "type": "state-timeline"
     }
   ],
   "refresh": "5s",
