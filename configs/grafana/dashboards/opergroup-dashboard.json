@@ -115,7 +115,7 @@
             "uid": "PBFA97CFB590B2093"
           },
           "editorMode": "code",
-          "expr": "rate(gnmic_srl_if_in_octets{source=\"leaf1:57400\",interface_name=\"ethernet-1/49\"}[5s])*8",
+          "expr": "gnmic_srl_if_in_bps{source=\"leaf1:57400\",interface_name=\"ethernet-1/49\"}",
           "interval": "",
           "legendFormat": "IN",
           "queryType": "randomWalk",
@@ -128,7 +128,7 @@
             "uid": "PBFA97CFB590B2093"
           },
           "editorMode": "code",
-          "expr": "-rate(gnmic_srl_if_out_octets{source=\"leaf1:57400\",interface_name=\"ethernet-1/49\"}[5s])*8",
+          "expr": "gnmic_srl_if_out_bps{source=\"leaf1:57400\",interface_name=\"ethernet-1/49\"}",
           "interval": "",
           "legendFormat": "OUT",
           "range": true,
@@ -223,7 +223,7 @@
             "uid": "PBFA97CFB590B2093"
           },
           "editorMode": "code",
-          "expr": "rate(gnmic_srl_if_in_octets{source=\"leaf1:57400\",interface_name=\"ethernet-1/50\"}[5s])*8",
+          "expr": "gnmic_srl_if_in_bps{source=\"leaf1:57400\",interface_name=\"ethernet-1/50\"}",
           "interval": "",
           "legendFormat": "IN",
           "queryType": "randomWalk",
@@ -236,7 +236,7 @@
             "uid": "PBFA97CFB590B2093"
           },
           "editorMode": "code",
-          "expr": "-rate(gnmic_srl_if_out_octets{source=\"leaf1:57400\",interface_name=\"ethernet-1/50\"}[5s])*8",
+          "expr": "gnmic_srl_if_out_bps{source=\"leaf1:57400\",interface_name=\"ethernet-1/50\"}",
           "interval": "",
           "legendFormat": "OUT",
           "range": true,
@@ -270,7 +270,7 @@
               "tooltip": false,
               "viz": false
             },
-            "lineInterpolation": "linear",
+            "lineInterpolation": "smooth",
             "lineWidth": 1,
             "pointSize": 5,
             "scaleDistribution": {
@@ -331,7 +331,7 @@
             "uid": "PBFA97CFB590B2093"
           },
           "editorMode": "code",
-          "expr": "rate(gnmic_srl_if_in_octets{source=\"leaf2:57400\",interface_name=\"ethernet-1/49\"}[5s])*8",
+          "expr": "gnmic_srl_if_in_bps{source=\"leaf2:57400\",interface_name=\"ethernet-1/49\"}",
           "interval": "",
           "legendFormat": "IN",
           "queryType": "randomWalk",
@@ -344,7 +344,7 @@
             "uid": "PBFA97CFB590B2093"
           },
           "editorMode": "code",
-          "expr": "-rate(gnmic_srl_if_out_octets{source=\"leaf2:57400\",interface_name=\"ethernet-1/49\"}[5s])*8",
+          "expr": "gnmic_srl_if_out_bps{source=\"leaf2:57400\",interface_name=\"ethernet-1/49\"}",
           "interval": "",
           "legendFormat": "OUT",
           "range": true,
@@ -378,7 +378,7 @@
               "tooltip": false,
               "viz": false
             },
-            "lineInterpolation": "linear",
+            "lineInterpolation": "smooth",
             "lineWidth": 1,
             "pointSize": 5,
             "scaleDistribution": {
@@ -439,7 +439,7 @@
             "uid": "PBFA97CFB590B2093"
           },
           "editorMode": "code",
-          "expr": "rate(gnmic_srl_if_in_octets{source=\"leaf2:57400\",interface_name=\"ethernet-1/50\"}[5s])*8",
+          "expr": "gnmic_srl_if_in_bps{source=\"leaf2:57400\",interface_name=\"ethernet-1/50\"}",
           "interval": "",
           "legendFormat": "IN",
           "queryType": "randomWalk",
@@ -452,7 +452,7 @@
             "uid": "PBFA97CFB590B2093"
           },
           "editorMode": "code",
-          "expr": "-rate(gnmic_srl_if_out_octets{source=\"leaf2:57400\",interface_name=\"ethernet-1/50\"}[5s])*8",
+          "expr": "gnmic_srl_if_out_bps{source=\"leaf2:57400\",interface_name=\"ethernet-1/50\"}",
           "interval": "",
           "legendFormat": "OUT",
           "range": true,
@@ -547,7 +547,7 @@
             "uid": "PBFA97CFB590B2093"
           },
           "editorMode": "code",
-          "expr": "rate(gnmic_srl_if_in_octets{source=\"leaf1:57400\",interface_name=\"ethernet-1/1\"}[5s])*8",
+          "expr": "gnmic_srl_if_in_bps{source=\"leaf1:57400\",interface_name=\"ethernet-1/1\"}",
           "instant": false,
           "interval": "",
           "intervalFactor": 1,
@@ -561,7 +561,7 @@
             "uid": "PBFA97CFB590B2093"
           },
           "editorMode": "code",
-          "expr": "-rate(gnmic_srl_if_out_octets{source=\"leaf1:57400\",interface_name=\"ethernet-1/1\"}[5s])*8",
+          "expr": "gnmic_srl_if_out_bps{source=\"leaf1:57400\",interface_name=\"ethernet-1/1\"}",
           "interval": "",
           "legendFormat": "OUT",
           "range": true,
@@ -616,7 +616,7 @@
               "tooltip": false,
               "viz": false
             },
-            "lineInterpolation": "linear",
+            "lineInterpolation": "smooth",
             "lineWidth": 1,
             "pointSize": 5,
             "scaleDistribution": {
@@ -677,7 +677,9 @@
             "uid": "PBFA97CFB590B2093"
           },
           "editorMode": "code",
-          "expr": "rate(gnmic_srl_if_in_octets{source=\"leaf2:57400\",interface_name=\"ethernet-1/1\"}[5s])*8",
+          "exemplar": false,
+          "expr": "gnmic_srl_if_in_bps{source=\"leaf2:57400\",interface_name=\"ethernet-1/1\"}",
+          "instant": false,
           "interval": "",
           "legendFormat": "IN",
           "queryType": "randomWalk",
@@ -690,7 +692,7 @@
             "uid": "PBFA97CFB590B2093"
           },
           "editorMode": "code",
-          "expr": "-rate(gnmic_srl_if_out_octets{source=\"leaf2:57400\",interface_name=\"ethernet-1/1\"}[5s])*8",
+          "expr": "gnmic_srl_if_out_bps{source=\"leaf2:57400\",interface_name=\"ethernet-1/1\"}",
           "interval": "",
           "legendFormat": "OUT",
           "range": true,

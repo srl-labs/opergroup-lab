@@ -12,11 +12,11 @@ targets:
 subscriptions:
   srl_if:
     paths:
-      - /interface[name=ethernet-1/1]/statistics
+      - /interface[name=ethernet-1/1]/traffic-rate
       - /interface[name=ethernet-1/1]/oper-state
-      - /interface[name=ethernet-1/49]/statistics
+      - /interface[name=ethernet-1/49]/traffic-rate
       - /interface[name=ethernet-1/49]/oper-state
-      - /interface[name=ethernet-1/50]/statistics
+      - /interface[name=ethernet-1/50]/traffic-rate
       - /interface[name=ethernet-1/50]/oper-state
     mode: stream
     stream-mode: sample
