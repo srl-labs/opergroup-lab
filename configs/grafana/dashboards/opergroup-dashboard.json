@@ -40,6 +40,8 @@
           "custom": {
             "axisLabel": "",
             "axisPlacement": "auto",
+            "axisSoftMax": 100000,
+            "axisSoftMin": -100000,
             "barAlignment": 0,
             "drawStyle": "line",
             "fillOpacity": 10,
@@ -58,7 +60,7 @@
             "scaleDistribution": {
               "type": "linear"
             },
-            "showPoints": "auto",
+            "showPoints": "never",
             "spanNulls": true,
             "stacking": {
               "group": "A",
@@ -149,6 +151,8 @@
           "custom": {
             "axisLabel": "",
             "axisPlacement": "auto",
+            "axisSoftMax": 100000,
+            "axisSoftMin": -100000,
             "barAlignment": 0,
             "drawStyle": "line",
             "fillOpacity": 10,
@@ -255,6 +259,8 @@
           "custom": {
             "axisLabel": "",
             "axisPlacement": "auto",
+            "axisSoftMax": 100000,
+            "axisSoftMin": -100000,
             "barAlignment": 0,
             "drawStyle": "line",
             "fillOpacity": 10,
@@ -361,6 +367,8 @@
           "custom": {
             "axisLabel": "",
             "axisPlacement": "auto",
+            "axisSoftMax": 100000,
+            "axisSoftMin": -100000,
             "barAlignment": 0,
             "drawStyle": "line",
             "fillOpacity": 10,
@@ -467,6 +475,8 @@
           "custom": {
             "axisLabel": "",
             "axisPlacement": "auto",
+            "axisSoftMax": 100000,
+            "axisSoftMin": -100000,
             "barAlignment": 0,
             "drawStyle": "line",
             "fillOpacity": 10,
@@ -595,6 +605,8 @@
           "custom": {
             "axisLabel": "",
             "axisPlacement": "auto",
+            "axisSoftMax": 100000,
+            "axisSoftMin": -100000,
             "barAlignment": 0,
             "drawStyle": "line",
             "fillOpacity": 10,
@@ -834,6 +846,6 @@
   "timezone": "",
   "title": "opergroups",
   "uid": "W19czJw7k",
-  "version": 1,
+  "version": 2,
   "weekStart": ""
 }
