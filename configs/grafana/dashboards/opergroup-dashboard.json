@@ -749,7 +749,7 @@
       },
       "gridPos": {
         "h": 5,
-        "w": 9,
+        "w": 5,
         "x": 0,
         "y": 14
       },
@@ -818,6 +818,118 @@
       ],
       "title": "leaf1 oper-states",
       "type": "state-timeline"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "PBFA97CFB590B2093"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "fixed"
+          },
+          "custom": {
+            "fillOpacity": 70,
+            "lineWidth": 0,
+            "spanNulls": false
+          },
+          "mappings": [
+            {
+              "options": {
+                "0": {
+                  "color": "red",
+                  "index": 0,
+                  "text": "DOWN"
+                },
+                "1": {
+                  "color": "green",
+                  "index": 1,
+                  "text": "UP"
+                },
+                "2": {
+                  "color": "semi-dark-orange",
+                  "index": 2,
+                  "text": "ACTIVE"
+                },
+                "3": {
+                  "color": "yellow",
+                  "index": 3,
+                  "text": "CONNECT"
+                }
+              },
+              "type": "value"
+            }
+          ],
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": null
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 4,
+        "x": 5,
+        "y": 14
+      },
+      "id": 14,
+      "interval": "1s",
+      "options": {
+        "alignValue": "left",
+        "legend": {
+          "displayMode": "hidden",
+          "placement": "bottom"
+        },
+        "mergeValues": true,
+        "rowHeight": 0.9,
+        "showValue": "auto",
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "8.5.0",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "gnmic_srl_bgp_session_state{source=\"leaf1:57400\",neighbor_peer_address=\"10.0.1.1\"}",
+          "format": "time_series",
+          "instant": false,
+          "legendFormat": "with spine1",
+          "range": true,
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "gnmic_srl_bgp_session_state{source=\"leaf1:57400\",neighbor_peer_address=\"10.0.1.2\"}",
+          "format": "time_series",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "with spine2",
+          "range": true,
+          "refId": "B"
+        }
+      ],
+      "title": "leaf1 iBGP sessions state",
+      "type": "state-timeline"
     }
   ],
   "refresh": "5s",
@@ -848,6 +960,6 @@
   "timezone": "",
   "title": "opergroups",
   "uid": "W19czJw7k",
-  "version": 2,
+  "version": 1,
   "weekStart": ""
 }

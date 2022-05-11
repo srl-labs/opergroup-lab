@@ -21,6 +21,12 @@ subscriptions:
     mode: stream
     stream-mode: sample
     sample-interval: 1s
+  srl_bgp:
+    paths:
+      - /network-instance[name=default]/protocols/bgp/neighbor[peer-address=*]/session-state
+    mode: stream
+    stream-mode: sample
+    sample-interval: 1s
 
 outputs:
   prom:
@@ -67,3 +73,16 @@ processors:
             apply-on: "value"
             old: "up"
             new: "1"
+        # re-map bgp session-state values
+        - replace:
+            apply-on: "value"
+            old: "established"
+            new: "1"
+        - replace:
+            apply-on: "value"
+            old: "active"
+            new: "2"
+        - replace:
+            apply-on: "value"
+            old: "connect"
+            new: "3"
