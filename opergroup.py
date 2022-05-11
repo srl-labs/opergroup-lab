@@ -24,7 +24,7 @@ def event_handler_main(in_json_str):
 
     num_up_uplinks = count_up_uplinks(paths)
     downlinks_new_state = (
-        "up" if required_up_uplinks(options) <= num_up_uplinks else "down"
+        "down" if num_up_uplinks < required_up_uplinks(options) else "up"
     )
 
     if options.get("debug") == "true":
@@ -73,7 +73,7 @@ def main():
             "Ethernet-1/2"
         ],
         "debug": "true"
-        },
+    },
     "persistent-data": {"last-state":"up"}
 }
 """

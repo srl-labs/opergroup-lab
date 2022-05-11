@@ -7,7 +7,8 @@ topology:
     kind: srl
   kinds:
     srl:
-      image: srlinux:36067 # TODO: change to ghcr.io/nokia/srlinux:22.3.2
+      # image: cr.srlinux.dev/plm/srlinux # TODO: change to ghcr.io/nokia/srlinux:22.3.2
+      image: ghcr.io/nokia/srlinux:21.11.3
   nodes:
     ### FABRIC ###
     leaf1:
