@@ -4,9 +4,9 @@ prefix: ""
 
 topology:
   defaults:
-    kind: srl
+    kind: nokia_srlinux
   kinds:
-    srl:
+    nokia_srlinux:
       image: ghcr.io/nokia/srlinux:22.3.2
   nodes:
     ### FABRIC ###
