@@ -7,7 +7,7 @@ topology:
     kind: nokia_srlinux
   kinds:
     nokia_srlinux:
-      image: ghcr.io/nokia/srlinux:22.3.2
+      image: ghcr.io/nokia/srlinux:24.10.1
   nodes:
     ### FABRIC ###
     leaf1:
