@@ -1,4 +1,4 @@
-# topology documentation: http://learn.srlinux.dev/tutorials/programmability/event-handler/oper-group/
+# topology documentation: https://learn.srlinux.dev/tutorials/programmability/event-handler/oper-group/oper-group-cfg/
 name: opergroup
 prefix: ""
 
@@ -7,7 +7,7 @@ topology:
     kind: nokia_srlinux
   kinds:
     nokia_srlinux:
-      image: ghcr.io/nokia/srlinux:24.10.1
+      image: ghcr.io/nokia/srlinux:24.10.2
   nodes:
     ### FABRIC ###
     leaf1:
@@ -27,7 +27,7 @@ topology:
     ### CLIENTS ###
     client1:
       kind: linux
-      image: ghcr.io/hellt/network-multitool
+      image: ghcr.io/srl-labs/network-multitool
       binds:
         - configs/bond.sh:/tmp/bond.sh
       exec:
@@ -48,7 +48,7 @@ topology:
     ### TELEMETRY STACK ###
     gnmic:
       kind: linux
-      image: ghcr.io/karimra/gnmic:0.24.4
+      image: ghcr.io/openconfig/gnmic:0.40.0
       binds:
         - configs/gnmic.yml:/gnmic.yml:ro
       cmd: --config /gnmic.yml --log subscribe
@@ -73,7 +73,7 @@ topology:
         - 3000:3000
 
   links:
-    # client1/2 links towards leaves
+    # client1/2 links towards leafs
     - endpoints: ["client1:eth1", "leaf1:e1-1"]
     - endpoints: ["client1:eth2", "leaf2:e1-1"]
     - endpoints: ["client2:eth1", "leaf3:e1-1"]
